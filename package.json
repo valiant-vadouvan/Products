@@ -1,0 +1,22 @@
+{
+  "name": "sdcproducts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mongo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valiant-vadouvan/Products.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/valiant-vadouvan/Products/issues"
+  },
+  "homepage": "https://github.com/valiant-vadouvan/Products#readme",
+  "dependencies": {
+    "pg": "^8.7.1"
+  }
+}
