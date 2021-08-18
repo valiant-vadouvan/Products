@@ -38,7 +38,7 @@ module.exports = {
     )
     FROM products p
     WHERE p.id = $1;`;
-    connection.query(qString,[product_id], (err, data) => {
+    connection.query(qString, [product_id], (err, data) => {
       if (err) {
         callback(err, null);
       } else {

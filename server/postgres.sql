@@ -41,18 +41,20 @@ CREATE TABLE styles (
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
-CREATE TABLE photos (
-    style_id INT NOT NULL,
-    url TEXT NOT NULL,
-    thumbnail_url TEXT NOT NULL,
-    FOREIGN KEY (style_id) REFERENCES styles(style_id)
-);
-
 CREATE TABLE skus (
     id SERIAL NOT NULL,
     style_id INT NOT NULL,
     size TEXT NOT NULL,
     quantity INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (style_id) REFERENCES styles(style_id)
+);
+
+CREATE TABLE photos (
+    id SERIAL NOT NULL,
+    style_id INT NOT NULL,
+    url TEXT NOT NULL,
+    thumbnail_url TEXT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (style_id) REFERENCES styles(style_id)
 );
@@ -65,6 +67,17 @@ COPY related_products(id, current_product_id, related_product_id) FROM '/Users/n
 
 COPY styles(style_id, product_id, name, sale_price, original_price, default_style) FROM '/Users/nhumai/HackReactor/SDCProducts/data/styles.csv' WITH (FORMAT CSV, NULL 'null', HEADER);
 
-COPY photos(style_id, url, thumbnail_url) FROM '/Users/nhumai/HackReactor/SDCProducts/data/photos.csv' DELIMITER ',' CSV HEADER;
-
 COPY skus(id, style_id, size, quantity) FROM '/Users/nhumai/HackReactor/SDCProducts/data/skus.csv' DELIMITER ',' CSV HEADER;
+
+COPY photos(id, style_id, url, thumbnail_url) FROM '/Users/nhumai/HackReactor/SDCProducts/data/photos.csv' DELIMITER ',' CSV HEADER;
+
+
+CREATE INDEX features_product_id_index ON features (product_id);
+
+CREATE INDEX related_products_current_product_id_index ON related_products (current_product_id);
+
+CREATE INDEX styles_product_id_index ON styles (product_id);
+
+CREATE INDEX skus_style_id_index ON skus (style_id);
+
+CREATE INDEX photos_style_id_index ON photos (style_id);
